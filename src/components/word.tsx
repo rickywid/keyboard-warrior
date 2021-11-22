@@ -3,33 +3,26 @@ import Char from "./char";
 
 interface WordProps {
     word: string;
-    charCode: number | null;
-    length: number;
+    typedKey: number | null;
+    // length: number;
     removeWord: () => void;
-    clearInput: () => void;
+    // clearInput: () => void;
+    // updateCharPosition: (index: number) => void;
+    prevChar: string;
+    nextChar: string;
+    currentCharIndex: number;
+    isMatch: boolean;
 }
 
-const Word: FunctionComponent<WordProps> = ({ word, charCode, length, removeWord, clearInput }) => {
-    const [currentCharIndex, setCurrentCharIndex] = useState<number>(0);
+const Word: FunctionComponent<WordProps> = ({ word, typedKey, currentCharIndex, removeWord, isMatch, prevChar, nextChar }) => {
+    // const [currentCharIndex, setCurrentCharIndex] = useState<number>(0);
 
     useEffect(() => {
-        if (length === currentCharIndex) {
+        
+        if (currentCharIndex === word.length) {
             removeWord();
-            setCurrentCharIndex(0);
         }
-
-        if (charCode === word.charCodeAt(currentCharIndex)) {
-            console.log(true, charCode, word.charCodeAt(currentCharIndex))
-            setCurrentCharIndex(prevState => prevState + 1);
-        } else {
-            console.log(false, charCode, word.charCodeAt(currentCharIndex))
-            // inccorect letter 
-            // clear input
-            // move currentCharIndex back to 0
-            clearInput();
-            // setCurrentCharIndex(0);
-        }
-    }, [charCode, word, currentCharIndex, length, removeWord, clearInput]);
+    }, [currentCharIndex, removeWord, word]);
 
     const displayCharacter = () => {
         return word.split('').map((char, index) => {
@@ -37,7 +30,7 @@ const Word: FunctionComponent<WordProps> = ({ word, charCode, length, removeWord
                 <Char
                     key={index}
                     character={char}
-                    isMatch={currentCharIndex === index}
+                    underline={currentCharIndex === index}
                 />
             )
         })

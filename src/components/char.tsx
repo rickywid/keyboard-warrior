@@ -1,16 +1,16 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 
 interface CharProps {
     character: string;
-    isMatch?: boolean;
+    underline?: boolean;
     secondary?: boolean;
 }
 
-const Char: FunctionComponent<CharProps> = ({ character, isMatch, secondary }) => {
+const Char: FunctionComponent<CharProps> = ({ character, underline, secondary }) => {
 
     const style = {
         display: 'inline-block',
-        textDecoration: isMatch ? 'underline' : 'none',
+        textDecoration: underline ? 'underline' : 'none',
         color: secondary ? '#cfcece' : '',
         // float: secondary ? 'right' : 'none'
     }

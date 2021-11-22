@@ -9,7 +9,7 @@ const Keyboard: FunctionComponent<KeyboardProps> = ({ k }) => {
 
     const style = {
         border: '1px solid black',
-        // paddingLeft: 30
+        borderRadius: 5
 
     }
     const style2 = {
