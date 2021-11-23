@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { motion } from "framer-motion"
 import './App.css';
 import GameResults from './components/gameResults';
 import Keyboard from './components/keyboard';
@@ -6,6 +7,7 @@ import Scoreboard from './components/scoreboard';
 import Timer from './components/timer';
 import Welcome from './components/welcome';
 import Word from './components/word';
+import { GameContext } from './context/game';
 
 
 
@@ -14,18 +16,25 @@ const wordsList = ["HELLO", "WORLD"];
 
 function App() {
 
+    const {
+        gameStarted,
+        setGameStarted,
+        wordsAttempts,
+        setWordsAttempts,
+        wordsCompleted,
+        setWordsCompleted,
+        startTimer,
+        setStartTimer,
+        showGameResults,
+        setShowGameResults
+    } = useContext(GameContext);
+    
     const [charCode, setCharCode] = useState<number | null>(null); // charcode of keydown key
     const [words, setWords] = useState<string[]>(wordsList); // list of words to render
     const [inputVal, setInputVal] = useState<string>(""); // input value
-    const [currentCharIndex, setCurrentCharIndex] = useState<number>(0); // current character 
-    const [gameStarted, setGameStarted] = useState<boolean>(false);
-    const [wordsAttempts, setWordsAttempts] = useState<number>(0);
-    const [wordsCompleted, setWordsCompleted] = useState<number>(0);
-    const [startTimer, setStartTimer] = useState<boolean>(false);
-    const [showGameResults, setShowGameResults] = useState<boolean>(false);
+    const [currentCharIndex, setCurrentCharIndex] = useState<number>(0); // current character  
 
     const [displayNotification, setDisplayNotification] = useState<{ enterBtn: boolean, error: boolean }>({ enterBtn: false, error: false });
-
 
     const handleUserKeyPress = useCallback(event => {
         const { keyCode } = event;
@@ -33,7 +42,7 @@ function App() {
         if (words.length) {
             if (inputVal.toUpperCase() === words[0]) {
                 if (keyCode === 13) {
-                    setWordsCompleted(prevState => prevState + 1)
+                    setWordsCompleted(wordsCompleted + 1)
                     setInputVal("")
                     removeWord();
 
@@ -87,7 +96,7 @@ function App() {
             value.charAt(currentCharIndex).toUpperCase();
 
         if (!isValid) {
-            setWordsAttempts(prevState => prevState + 1)
+            setWordsAttempts(wordsAttempts + 1)
             setDisplayNotification({
                 enterBtn: false,
                 error: true
