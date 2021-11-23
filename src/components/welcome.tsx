@@ -1,13 +1,13 @@
 import { FunctionComponent } from "react";
 
 interface WelcomeProps {
-    updateGameStatus: () => void;
+    start: () => void;
 }
 
-const Welcome: FunctionComponent<WelcomeProps> = ({ updateGameStatus }) => {
+const Welcome: FunctionComponent<WelcomeProps> = ({ start }) => {
 
     const handleOnClick = () => {
-        updateGameStatus();
+        start();
     }
 
     return (

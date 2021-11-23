@@ -5,12 +5,13 @@ import useInterval from "../hooks/useInterval";
 
 interface ITimer {
     startTimer: boolean;
-    updateGameStatus: () => void;
+    start: () => void;
+    stop: () => void;
 }
 
-function Timer({ startTimer, updateGameStatus }: ITimer) {
-    const [seconds, setSeconds] = useState(0);
-    const [minutes, setMinutes] = useState(1);
+function Timer({ startTimer, start, stop }: ITimer) {
+    const [seconds, setSeconds] = useState(10);
+    const [minutes, setMinutes] = useState(0);
     //   const [startTimer, setStartTimer] = useState<boolean>(false);
     //   const Alarm = new Audio(AlarmWAV);
 
@@ -26,7 +27,7 @@ function Timer({ startTimer, updateGameStatus }: ITimer) {
                     setSeconds(59);
                     setMinutes(minutes - 1)
                 } else {
-                    updateGameStatus();
+                    stop();
                     //   playAudio();
                     //   setStartTimer(false);
                     // setMinutes(25);

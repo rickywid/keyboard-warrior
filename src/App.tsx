@@ -21,6 +21,7 @@ function App() {
     const [wordsAttempts, setWordsAttempts] = useState<number>(0);
     const [wordsCompleted, setWordsCompleted] = useState<number>(0);
     const [startTimer, setStartTimer] = useState<boolean>(false);
+    const [showGameResults, setShowGameResults] = useState<boolean>(false);
 
     const handleUserKeyPress = useCallback(event => {
         const { keyCode } = event;
@@ -79,10 +80,22 @@ function App() {
         setCurrentCharIndex((prevCharIndex) => (isValid ? prevCharIndex + 1 : 0));
     }
 
-    const updateGameStatus = () => {
-        setGameStarted(!gameStarted)
-        setStartTimer(!startTimer);
+    const start = () => {
+        setGameStarted(true)
+        setStartTimer(true);
+        setShowGameResults(true);
     };
+
+    const stop = () => {
+        setGameStarted(false)
+        setStartTimer(false);
+    };
+
+    const updateGameResults = (val: boolean) => {
+        setShowGameResults(val);
+    }
+
+    console.log(showGameResults)
 
     return (
         <div className="App">
@@ -95,7 +108,8 @@ function App() {
                         />
                         <Timer
                             startTimer={startTimer}
-                            updateGameStatus={updateGameStatus}
+                            start={start}
+                            stop={stop}
                         />
                     </div>
                     {displayWord()}
@@ -111,9 +125,16 @@ function App() {
                     <Keyboard k={charCode as unknown as number} />
                 </main>
             ) : (
-                <Welcome
-                    updateGameStatus={updateGameStatus}
-                />
+                showGameResults ? <div>
+                    <button onClick={() => {
+                        start();
+                        updateGameResults(true)
+                    }}>Yes</button>
+                    <button onClick={() => updateGameResults(false)}>No</button>
+                </div> :
+                    <Welcome
+                        start={start}
+                    />
             )}
         </div>
     );
