@@ -1,38 +1,75 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
+import "../styles/key.css";
 
 interface KeyProps {
-    val: string;
-    isPressed: boolean;
+    val?: string;
+    colorScheme: string;
+    isPressed?: boolean;
     isSpacebar?: boolean;
+    stretch?: boolean;
 }
 
-const Key: FunctionComponent<KeyProps> = ({ val, isPressed, isSpacebar }) => {
+const Key: FunctionComponent<KeyProps> = ({ val, isPressed, isSpacebar, colorScheme, stretch }) => {
+
+
+    // primary: letters
+    // secondary: spacebar, enter
+    // third: delete, alt, shift, ctrl, tab, caps
+
+
+    const [primary, setPrimary] = useState<string[]>([]);
+    const [keyColor, setKeyColor] = useState<string>("");
+
+    useEffect(() => {
+
+
+        switch (colorScheme) {
+            case 'white':
+                setPrimary(["#d6cec3", "#aea995"])
+                setKeyColor('black')
+
+                break;
+
+            case 'orange':
+                setPrimary(["#e58952", "#a0470e"]);
+                break;
+
+            case 'grey':
+                setPrimary(["#4e4b51", "#161314"]);
+                setKeyColor('white')
+                break;
+        }
+    }, [colorScheme])
+
 
     const style = {
-        display: 'inline-block',
-        marginRight: 20,
+        borderLeft: isPressed ? `2px solid ${primary[0]}` : `5px solid ${primary[1]}`,
+        borderRight: isPressed ? `2px solid ${primary[0]}` : `5px solid ${primary[1]}`,
+        borderTop: isPressed ? `2px solid ${primary[0]}` : `1px solid ${primary[1]}`,
+        borderBottom: isPressed ? `2px solid ${primary[0]}` : `5px solid ${primary[1]}`,
         width: isSpacebar ? 300 : 50,
-        height: 50,
-        // boxShadow: isPressed ? '0px 0px 15px 7px rgba(149,253,247,0.75)' : 'none',
-        borderLeft: isPressed ? '2px solid #6d6d6d' : '1px solid black',
-        borderRight: isPressed ? '2px solid #6d6d6d' : '1px solid black',
-        borderTop: isPressed ? '2px solid #6d6d6d' : '1px solid black',
-        borderBottom: '3px solid #6d6d6d',
-        borderRadius: '5px',
-        margin: 5,
-        flex: val ==='DEL' || val === 'ENTER' || val === 'SHFT' ? 'auto' : 'inherit'
-    }
+        flex: stretch ? 'auto' : 'inherit',
+        background: primary[0],
+        color: keyColor,
+        position: 'relative',
+        height: !val ? 20 : 'intiial',
+        margin: !val ? 0 : 1,
 
-    const style2 = {
-        padding: 0
-    }
+}
 
+const style2 = {
+    padding: 0,
+    margin: 0,
+    top: 5,
+    right: '33%',
+}
 
-    return (
-        <div style={style}>
-            <p style={style2}>{val}</p>
-        </div>
-    );
+return (
+    // @ts-ignore
+    <div className="key" style={style}>
+        <p style={style2}>{val}</p>
+    </div>
+);
 }
 
 export default Key;

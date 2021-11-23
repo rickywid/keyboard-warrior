@@ -1,0 +1,9 @@
+.key {
+    display: inline-block;
+    margin-right: 20px;
+    height: 50px;
+    border-bottom: 5px solid #a75324;
+    border-radius: 5px;
+    margin: 5px;
+}
+

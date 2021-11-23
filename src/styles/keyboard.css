@@ -1,0 +1,34 @@
+.keyboard {
+    background: #545454;
+    border-top: 1px solid #545454;
+    border-left: 1px solid #545454;
+    border-right: 1px solid #545454;
+    border-bottom: 10px solid #353535;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.keyboard-layout {
+    display: flex;
+    justify-content: center;
+}
+
+.keyboard-keys {
+    display: flex;
+    justify-content: center;
+}
+
+.keyboard-keys.middle {
+    /* padding-left: 30px; */
+}
+
+.keyboard-keys.bottom {
+    /* padding-left: 80px; */
+}
+
+.keyboard-arrows {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+}

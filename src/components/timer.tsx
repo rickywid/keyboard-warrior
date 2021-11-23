@@ -10,8 +10,8 @@ interface ITimer {
 }
 
 function Timer({ startTimer, start, stop }: ITimer) {
-    const [seconds, setSeconds] = useState(10);
-    const [minutes, setMinutes] = useState(0);
+    const [seconds, setSeconds] = useState(0);
+    const [minutes, setMinutes] = useState(200);
     //   const [startTimer, setStartTimer] = useState<boolean>(false);
     //   const Alarm = new Audio(AlarmWAV);
 

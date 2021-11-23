@@ -24,12 +24,15 @@ function App() {
     const [startTimer, setStartTimer] = useState<boolean>(false);
     const [showGameResults, setShowGameResults] = useState<boolean>(false);
 
+    const [displayNotification, setDisplayNotification] = useState<{ enterBtn: boolean, error: boolean }>({ enterBtn: false, error: false });
+
+
     const handleUserKeyPress = useCallback(event => {
         const { keyCode } = event;
 
         if (words.length) {
-            if (keyCode === 13) {
-                if (inputVal.toUpperCase() === words[0]) {
+            if (inputVal.toUpperCase() === words[0]) {
+                if (keyCode === 13) {
                     setWordsCompleted(prevState => prevState + 1)
                     setInputVal("")
                     removeWord();
@@ -41,6 +44,15 @@ function App() {
             }
         }
     }, [inputVal, words]);
+
+    useEffect(() => {
+        if (inputVal.toUpperCase() === words[0]) {
+            setDisplayNotification({
+                error: false,
+                enterBtn: true
+            })
+        }
+    }, [inputVal])
 
     useEffect(() => {
         window.addEventListener("keydown", handleUserKeyPress);
@@ -76,6 +88,10 @@ function App() {
 
         if (!isValid) {
             setWordsAttempts(prevState => prevState + 1)
+            setDisplayNotification({
+                enterBtn: false,
+                error: true
+            })
         }
         setInputVal(isValid ? value : "");
         setCurrentCharIndex((prevCharIndex) => (isValid ? prevCharIndex + 1 : 0));
@@ -112,6 +128,8 @@ function App() {
                         />
                     </div>
                     {displayWord()}
+                    {displayNotification.enterBtn ? 'press enter' : ''}
+                    {displayNotification.error ? 'error' : ''}
                     <input
                         type="text"
                         style={{ width: '100%' }}
