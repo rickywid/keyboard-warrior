@@ -14,29 +14,19 @@ function App() {
     const [words, setWords] = useState<string[]>(wordsList); // list of words to render
     const [inputVal, setInputVal] = useState<string>(""); // input value
     const [currentCharIndex, setCurrentCharIndex] = useState<number>(0); // current character 
-    const [isMatch, setIsMatch] = useState<boolean>(false);
-    const [prevChar, setPrevChar] = useState<string>(words.length ? words[0][0] : "");
-    const [nextChar, setNextChar] = useState<string>(words.length ? words[0][1] : "");
-
 
     const handleUserKeyPress = useCallback(event => {
-        const { key, keyCode } = event;
+        const { keyCode } = event;
 
         if (words.length) {
-            if (keyCode === words[0][currentCharIndex].charCodeAt(0)) {
-                setCurrentCharIndex(prevState => prevState + 1);
-                setPrevChar(prevState => prevState + 1);
-                setNextChar(prevState => prevState + 1);
-                setIsMatch(true);
-            } else {
-                console.log(false)
-                setIsMatch(false);
-                setCurrentCharIndex(0)
-                setInputVal("")
+            if (keyCode === 13) {
+                if (inputVal.toUpperCase() === words[0]) {
+                    setInputVal("")
+                    removeWord();
+                }
             }
         }
-        // }
-    }, [words, currentCharIndex]);
+    }, [inputVal, words]);
 
     useEffect(() => {
         window.addEventListener("keydown", handleUserKeyPress);
@@ -47,34 +37,31 @@ function App() {
 
 
     const removeWord = () => {
-        setInputVal("");
-
         const wordsState = words;
         wordsState.shift();
-        console.log(wordsState)
         setWords(wordsState);
         setCurrentCharIndex(0)
+        setInputVal("");
     }
 
     const displayWord = () => {
-        // console.log(words)
         return words.length ? (
             <Word
                 word={words[0]}
-                removeWord={removeWord}
-                typedKey={charCode}
                 currentCharIndex={currentCharIndex}
-                isMatch={isMatch}
-                prevChar={prevChar}
-                nextChar={nextChar}
             />
         ) : 'Done'
     }
 
-    const handleKeyPress = (e: any) => {
-        // if (e.key !== 'Enter') {
-        setCharCode(e.keyCode);
-        // }
+    const handleInputChange = (e: any) => {
+        const { value } = e.target;
+
+        const isValid =
+            words[0].charAt(currentCharIndex) ===
+            value.charAt(currentCharIndex).toUpperCase();
+
+        setInputVal(isValid ? value : "");
+        setCurrentCharIndex((prevCharIndex) => (isValid ? prevCharIndex + 1 : 0));
     }
 
     return (
@@ -85,9 +72,9 @@ function App() {
                     type="text"
                     style={{ width: '100%' }}
                     value={inputVal}
-                    onChange={e => setInputVal(e.target.value)}
-                    onKeyDown={e => handleKeyPress(e)}
-                    onKeyUp={(e) => handleKeyPress(e)}
+                    onChange={e => handleInputChange(e)}
+                    onKeyDown={(e) => setCharCode(e.keyCode)}
+                    onKeyUp={() => setCharCode(null)}
                     autoFocus
                 />
                 <Keyboard k={charCode as unknown as number} />
