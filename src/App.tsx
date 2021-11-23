@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import './App.css';
+import GameResults from './components/gameResults';
 import Keyboard from './components/keyboard';
 import Scoreboard from './components/scoreboard';
 import Timer from './components/timer';
@@ -95,8 +96,6 @@ function App() {
         setShowGameResults(val);
     }
 
-    console.log(showGameResults)
-
     return (
         <div className="App">
             {gameStarted ? (
@@ -125,13 +124,11 @@ function App() {
                     <Keyboard k={charCode as unknown as number} />
                 </main>
             ) : (
-                showGameResults ? <div>
-                    <button onClick={() => {
-                        start();
-                        updateGameResults(true)
-                    }}>Yes</button>
-                    <button onClick={() => updateGameResults(false)}>No</button>
-                </div> :
+                showGameResults ?
+                    <GameResults
+                        start={start}
+                        updateGameResults={updateGameResults}
+                    /> :
                     <Welcome
                         start={start}
                     />
