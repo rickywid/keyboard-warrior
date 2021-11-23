@@ -19,9 +19,9 @@ reportWebVitals();
 /*
 User Stories
 ------------------------
-User can click a 'Start Practice' button to start the practice session.
-User can see the prompt word displayed in a text box.
-User can begin typing the word in a text input box.
+X User can click a 'Start Practice' button to start the practice session.
+X User can see the prompt word displayed in a text box.
+X User can begin typing the word in a text input box.
 User can see the letters that have been typed flash if an incorrect letter is entered and the text input box will be cleared.
 
 User can see the time interval words must be typed in displayed in the app window.
