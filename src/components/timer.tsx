@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useInterval from "../hooks/useInterval";
-// import AlarmWAV from './alarm1.wav';
 // import AudioImg from "./audio.png";
 
 interface ITimer {
@@ -10,7 +9,7 @@ interface ITimer {
 }
 
 function Timer({ startTimer, start, stop }: ITimer) {
-    const [seconds, setSeconds] = useState(30);
+    const [seconds, setSeconds] = useState(5);
     const [minutes, setMinutes] = useState(0);
     //   const [startTimer, setStartTimer] = useState<boolean>(false);
     //   const Alarm = new Audio(AlarmWAV);

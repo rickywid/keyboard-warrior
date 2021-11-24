@@ -22,6 +22,8 @@ reportWebVitals();
 /*
 
 https://www.prohavit.com/products/kb487l-tkl-mechanical-keyboard?currency=CAD
+https://www.duckychannel.com.tw/en/One-2-Tuxedo
+https://www.keychron.com/products/keychron-k6-wireless-mechanical-keyboard
 
 User Stories
 ------------------------

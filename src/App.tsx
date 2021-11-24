@@ -9,10 +9,22 @@ import Welcome from './components/welcome';
 import Word from './components/word';
 import { GameContext } from './context/game';
 import Notification from "./components/notifcation";
+import KeyboardWAV from './assets/sound/keyboard2.wav';
+import ErrorWAV from './assets/sound/error.wav';
+import GameMP3 from './assets/sound/game.mp3';
+import MenuMP3 from './assets/sound/menu.mp3';
 
 const wordsList = ["TORONTO", "MONTREAL", "VANCOUVER", "EDMONTON", "CALGARY", "OTTAWA", "SASKATCHEWAN"];
 
 function App() {
+      const KeyboardAudio = new Audio(KeyboardWAV);
+      const ErrorAudio = new Audio(ErrorWAV);
+      const GameAudio = new Audio(GameMP3);
+      const MenuAudio = new Audio(MenuMP3);
+      const keyboardAudio = () => KeyboardAudio.play();
+      const errorAudio = () => ErrorAudio.play();
+    //   const gameAudio = () => GameAudio.play();
+    //   const menuAudio = () => MenuAudio.play();
 
     const {
         gameStarted,
@@ -36,8 +48,7 @@ function App() {
     const [wordsListIndex, setWordsListIndex] = useState<number>(0);
 
     const handleUserKeyPress = useCallback(event => {
-        const { keyCode } = event;
-
+        const { keyCode } = event;        
         if (inputVal.toUpperCase() === wordsList[wordsListIndex]) {
             
             if (wordsListIndex === wordsList.length - 1) {
@@ -57,6 +68,13 @@ function App() {
         }
 
     }, [inputVal]);
+
+    // useEffect(() => {
+    //     GameAudio.addEventListener('ended', function () {
+    //         MenuAudio.play();
+    //     })
+    //     MenuAudio.play();
+    // }, [])
 
     useEffect(() => {
         if (inputVal.toUpperCase() === wordsList[wordsListIndex]) {
@@ -104,6 +122,7 @@ function App() {
                 enterBtn: false,
                 error: true
             })
+            errorAudio();
         } else {
             setDisplayNotification({
                 enterBtn: false,
@@ -121,10 +140,12 @@ function App() {
         setWordsListIndex(0);
         setWordsAttempts(0);
         setWordsCompleted(0);
-
+        // MenuAudio.play();
     };
 
     const stop = () => {
+        console.log('stop')
+        // MenuAudio.play();
         setGameStarted(false)
         setStartTimer(false);
     };
@@ -157,7 +178,10 @@ function App() {
                         style={{ width: '100%' }}
                         value={inputVal}
                         onChange={e => handleInputChange(e)}
-                        onKeyDown={(e) => setCharCode(e.keyCode)}
+                        onKeyDown={(e) => {
+                            setCharCode(e.keyCode)
+                            keyboardAudio();
+                        }}
                         onKeyUp={() => setCharCode(null)}
                         autoFocus
                         readOnly={disableInput}
