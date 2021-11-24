@@ -15,6 +15,7 @@ const GameProvider = ({ children }: any) => {
     const [showGameResults, setShowGameResults] = useState<boolean>(false);
     const [displayNotification, setDisplayNotification] = useState<{ enterBtn: boolean, error: boolean }>({ enterBtn: false, error: false });
     const [isWordsMatch, setIsWordsMatch] = useState<boolean>(false);
+    const [soundOn, setSoundOn] = useState<boolean>(true);
 
 
     return (
@@ -30,7 +31,9 @@ const GameProvider = ({ children }: any) => {
             displayNotification,
             setDisplayNotification,
             isWordsMatch,
-            setIsWordsMatch
+            setIsWordsMatch,
+            soundOn,
+            setSoundOn
         }} >
             {children}
         </GameContext.Provider>

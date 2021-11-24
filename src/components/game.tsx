@@ -35,7 +35,8 @@ const Game: FunctionComponent<GameProps> = () => {
         displayNotification,
         setDisplayNotification,
         isWordsMatch,
-        setIsWordsMatch
+        setIsWordsMatch,
+        soundOn
     } = useContext(GameContext);
 
 
@@ -90,16 +91,19 @@ const Game: FunctionComponent<GameProps> = () => {
     }
 
     useEffect(() => {
-        gameAudio.play();
-        gameAudio.addEventListener('ended', () => {
-            console.log('ended')
-            gameAudio.currentTime = 0;
+        if (soundOn) {
             gameAudio.play();
-        })
+            gameAudio.addEventListener('ended', () => {
+                console.log('ended')
+                gameAudio.currentTime = 0;
+                gameAudio.play();
+            })
+        }
+
         return () => {
             gameAudio.pause();
         }
-    }, []);
+    }, [soundOn]);
 
     const handleInputChange = (e: any) => {
         const { value } = e.target;
@@ -170,6 +174,7 @@ const Game: FunctionComponent<GameProps> = () => {
                 <Keyboard k={charCode as unknown as number} />
                 {/* {displayNotification.enterBtn && <Notification label="" />} */}
             </div>
+            <button onClick={() => setGameStarted(false)}>back</button>
         </main>
     );
 }

@@ -2,21 +2,24 @@ import { FunctionComponent, useContext, useEffect } from "react";
 import { GameContext } from "../context/game";
 import HappyAudio from '../assets/sound/happy.mp3';
 
-interface GameResultsProps {}
+interface GameResultsProps { }
 
 const GameResults: FunctionComponent<GameResultsProps> = () => {
 
-    const { setShowGameResults, setGameStarted } = useContext(GameContext);
+    const { setShowGameResults, setGameStarted, soundOn } = useContext(GameContext);
 
     const happyAudio = new Audio(HappyAudio);
 
     useEffect(() => {
-        happyAudio.play();
+        if (soundOn) {
+            happyAudio.play();
+        }
+
         return () => {
             happyAudio.pause();
         }
-    }, []);
-    
+    }, [soundOn]);
+
     return (
         <div>
             <button onClick={() => {
