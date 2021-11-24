@@ -1,0 +1,27 @@
+.game input {
+    width: 100%;
+    padding: 100px 50px;
+    font-size: 50px;
+    text-align: center;
+    background: #1d1d1d;
+    color: white;
+    border-top: 5px solid grey;
+    border-right: 5px solid grey;
+    border-left: 5px solid grey;
+    outline: none;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+
+.game-info {
+    margin-top: -30px;
+    margin-right: 20px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+}
+
+.game .game-top-bar {
+    position: relative;
+}

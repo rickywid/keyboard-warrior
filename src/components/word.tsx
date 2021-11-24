@@ -1,4 +1,5 @@
 import Char from "./char";
+import '../styles/word.css';
 
 interface WordProps {
     word: string;
@@ -20,7 +21,9 @@ const Word = ({ word, currentCharIndex }: WordProps) => {
     }
 
     return (
-        <div><span>{displayCharacter()}</span></div>
+        <div className="word">
+            {displayCharacter()}
+        </div>
     );
 }
 

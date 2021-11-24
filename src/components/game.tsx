@@ -6,6 +6,7 @@ import Notification from "./notifcation";
 import Word from "./word";
 import Keyboard from "./keyboard";
 import GameAudio from '../assets/sound/game.mp3';
+import '../styles/game.css';
 
 interface GameProps {
 
@@ -30,22 +31,24 @@ const Game: FunctionComponent<GameProps> = () => {
         setWordsAttempts,
         wordsCompleted,
         setWordsCompleted,
-        showGameResults,
         setShowGameResults,
         displayNotification,
-        setDisplayNotification
+        setDisplayNotification,
+        isWordsMatch,
+        setIsWordsMatch
     } = useContext(GameContext);
 
 
     const handleUserKeyPress = useCallback(event => {
         const { keyCode } = event;
         if (inputVal.toUpperCase() === wordsList[wordsListIndex]) {
-
             if (wordsListIndex === wordsList.length - 1) {
                 setGameStarted(!gameStarted);
+                setShowGameResults(true);
             }
 
             if (keyCode === 13) {
+                setIsWordsMatch(false);
                 setWordsCompleted(wordsCompleted + 1)
                 setInputVal("")
                 removeWord();
@@ -66,6 +69,7 @@ const Game: FunctionComponent<GameProps> = () => {
                 enterBtn: true
             });
             setDisableInput(true);
+            setIsWordsMatch(true);
         }
     }, [inputVal])
 
@@ -87,6 +91,11 @@ const Game: FunctionComponent<GameProps> = () => {
 
     useEffect(() => {
         gameAudio.play();
+        gameAudio.addEventListener('ended', () => {
+            console.log('ended')
+            gameAudio.currentTime = 0;
+            gameAudio.play();
+        })
         return () => {
             gameAudio.pause();
         }
@@ -104,12 +113,12 @@ const Game: FunctionComponent<GameProps> = () => {
             setDisplayNotification({
                 enterBtn: false,
                 error: true
-            })
+            });
         } else {
             setDisplayNotification({
                 enterBtn: false,
                 error: false
-            })
+            });
         }
         setInputVal(isValid ? value : "");
         setCurrentCharIndex((prevCharIndex) => (isValid ? prevCharIndex + 1 : 0));
@@ -132,21 +141,14 @@ const Game: FunctionComponent<GameProps> = () => {
     };
 
     return (
-        <main>
-            <div className="game-info">
-                <Scoreboard
-                    wordsAttempts={wordsAttempts}
-                    wordsCompleted={wordsCompleted}
-                />
-                <Timer
-                />
+        <main className="game">
+            <div className="game-top-bar">
+                {displayWord()}
+                {displayNotification.error && <Notification label="TRY AGAIN" />}
             </div>
-            {displayNotification.error && <Notification label="error" />}
-            {displayWord()}
-
             <input
                 type="text"
-                style={{ width: '100%' }}
+                className="input"
                 value={inputVal}
                 onChange={e => handleInputChange(e)}
                 onKeyDown={(e) => {
@@ -156,9 +158,17 @@ const Game: FunctionComponent<GameProps> = () => {
                 autoFocus
                 readOnly={disableInput}
             />
+            <div className="game-info">
+                <Scoreboard
+                    wordsAttempts={wordsAttempts}
+                    wordsCompleted={wordsCompleted}
+                />
+                <Timer
+                />
+            </div>
             <div style={{ position: 'relative' }}>
                 <Keyboard k={charCode as unknown as number} />
-                {displayNotification.enterBtn && <Notification label="Press Enter" />}
+                {/* {displayNotification.enterBtn && <Notification label="" />} */}
             </div>
         </main>
     );

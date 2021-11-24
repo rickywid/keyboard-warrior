@@ -1,5 +1,9 @@
 .notification {
     display: inline-block;
-    width: 80px;
-    padding: 10px
+    min-width: 100px;
+    padding: 10px;
+}
+
+.notification img {
+    transform: scaleX(-1);
 }

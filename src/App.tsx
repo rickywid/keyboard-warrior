@@ -28,13 +28,17 @@ function App() {
 
     return (
         <div className="App">
-            {gameStarted ? (
-                <Game />
-            ) : (
-                showGameResults ?
-                    <GameResults /> :
-                    <Welcome />
-            )}
+            <div className="body">
+                {gameStarted ? (
+                    <Game />
+                ) : (
+                    showGameResults ?
+                        <GameResults /> :
+                        <div>
+                            <Welcome />
+                        </div>
+                )}
+            </div>
         </div>
     );
 }

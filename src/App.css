@@ -1,14 +1,19 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .App {
-  display: flex;
-  min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    width: 100%;
+}
+
+.App .body {
+    margin: auto;
 }
 
 .App main {
-  margin: auto;
-  text-align: center;
-  width: 780px;
+    margin: auto;
+    text-align: center;
+    width: 780px;
 }

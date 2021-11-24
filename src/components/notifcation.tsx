@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FunctionComponent, useContext } from "react";
 import "../styles/notification.css";
+import ArrowPNG from '../assets/images/arrow.png';
 
 interface NotificationProps {
     label: string;
@@ -10,29 +11,35 @@ const Notification: FunctionComponent<NotificationProps> = ({ label }) => {
 
     const enterStyle = {
         position: 'absolute',
-        right: '-122px',
-        top: '40%',
-        background: 'green',
+        right: '-80px',
+        top: '33%',
     }
 
     const enterAnimate = {
         x: -30
     }
-    
+
     const errorStyle = {
-        background: 'red'
-    }
-    
-    const errorAnimate = {
-        y: 20
+        background: '#bb0000',
+        position: 'absolute',
+        right: '17px',
+        bottom: '-75px',
+        borderRadius: '5px',
+        fontWeight: 'bold',
+        borderBottom: '3px solid #750101'
     }
 
-    const style = label === "Press Enter" ? enterStyle : errorStyle;
-    const animate = label === "Press Enter" ? enterAnimate : errorAnimate;
+    const errorAnimate = {
+        y: 5
+    }
+
+    const style = label === "" ? enterStyle : errorStyle;
+    const animate = label === "" ? enterAnimate : errorAnimate;
 
     return (
         <motion.div
-        className="notification"
+            className="notification"
+            // @ts-ignore
             style={style}
             animate={animate}
             transition={{
@@ -40,7 +47,7 @@ const Notification: FunctionComponent<NotificationProps> = ({ label }) => {
                 yoyo: Infinity
             }}
         >
-            {label}
+            {label ? label : <img src={ArrowPNG} alt="arrow" />}
         </motion.div>
     );
 }

@@ -11,7 +11,7 @@ function Timer() {
 
     const { gameStarted, setShowGameResults, setGameStarted } = useContext(GameContext);
     const [seconds, setSeconds] = useState(5);
-    const [minutes, setMinutes] = useState(0);
+    const [minutes, setMinutes] = useState(100);
 
     // How to use setInterval w/ React
     // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
