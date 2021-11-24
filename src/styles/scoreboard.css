@@ -1,0 +1,8 @@
+.scoreboard {
+    display: flex;
+    text-align: right !important;
+  }
+  
+  .scoreboard p {
+    margin: 0 10px 0 0;
+  }

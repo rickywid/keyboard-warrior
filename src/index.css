@@ -12,16 +12,16 @@ code {
     monospace;
 }
 
-
-.scoreboard {
+.game-info {
   display: flex;
-  text-align: right !important;
-}
-
-.scoreboard p {
-  margin-right: 10px;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .timer {
   display: flex;
+}
+
+.timer h2 {
+  margin: 0;
 }

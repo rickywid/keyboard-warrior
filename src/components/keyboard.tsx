@@ -38,8 +38,8 @@ const Keyboard: FunctionComponent<KeyboardProps> = ({ k }) => {
                 <Key val="I" isPressed={k === 73 ? true : false} colorScheme="white" />
                 <Key val="O" isPressed={k === 79 ? true : false} colorScheme="white" />
                 <Key val="P" isPressed={k === 80 ? true : false} colorScheme="white" />
-                <Key val="[ {" isPressed={k === 77 ? true : false} colorScheme="white" />
-                <Key val="] }" isPressed={k === 77 ? true : false} colorScheme="white" />
+                <Key val="[ {" colorScheme="white" />
+                <Key val="] }" colorScheme="white" />
                 <Key val="\ |" isPressed={k === 8 ? true : false} colorScheme="white" stretch={true} />
             </div>
             <div className="keyboard-keys middle">
@@ -53,8 +53,8 @@ const Keyboard: FunctionComponent<KeyboardProps> = ({ k }) => {
                 <Key val="J" isPressed={k === 74 ? true : false} colorScheme="white" />
                 <Key val="K" isPressed={k === 75 ? true : false} colorScheme="white" />
                 <Key val="L" isPressed={k === 76 ? true : false} colorScheme="white" />
-                <Key val=": ;" isPressed={k === 77 ? true : false} colorScheme="white" />
-                <Key val={`' "`} isPressed={k === 77 ? true : false} colorScheme="white" />
+                <Key val=": ;" colorScheme="white" />
+                <Key val={`' "`} colorScheme="white" />
                 <Key val="ENTER" isPressed={k === 13 ? true : false} colorScheme="orange" stretch={true} />
             </div>
             <div className="keyboard-keys bottom">
@@ -66,9 +66,9 @@ const Keyboard: FunctionComponent<KeyboardProps> = ({ k }) => {
                 <Key val="B" isPressed={k === 66 ? true : false} colorScheme="white" />
                 <Key val="N" isPressed={k === 78 ? true : false} colorScheme="white" />
                 <Key val="M" isPressed={k === 77 ? true : false} colorScheme="white" />
-                <Key val=", <" isPressed={k === 77 ? true : false} colorScheme="white" />
-                <Key val=". >" isPressed={k === 77 ? true : false} colorScheme="white" />
-                <Key val="/ ?" isPressed={k === 77 ? true : false} colorScheme="white" />
+                <Key val=", <" colorScheme="white" />
+                <Key val=". >" colorScheme="white" />
+                <Key val="/ ?" colorScheme="white" />
                 <Key val="SHFT" colorScheme="grey" stretch={true} />
             </div>
             <div className="keyboard-layout">

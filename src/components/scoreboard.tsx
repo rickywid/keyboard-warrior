@@ -1,4 +1,5 @@
 import { FunctionComponent } from "react";
+import "../styles/scoreboard.css";
 
 interface ScoreboardProps {
     wordsAttempts: number;

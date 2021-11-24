@@ -8,11 +8,9 @@ import Timer from './components/timer';
 import Welcome from './components/welcome';
 import Word from './components/word';
 import { GameContext } from './context/game';
+import Notification from "./components/notifcation";
 
-
-
-const wordsList = ["HELLO", "WORLD"];
-
+const wordsList = ["TORONTO", "MONTREAL", "VANCOUVER", "EDMONTON", "CALGARY", "OTTAWA", "SASKATCHEWAN"];
 
 function App() {
 
@@ -26,40 +24,47 @@ function App() {
         startTimer,
         setStartTimer,
         showGameResults,
-        setShowGameResults
+        setShowGameResults,
+        displayNotification,
+        setDisplayNotification
     } = useContext(GameContext);
-    
+
     const [charCode, setCharCode] = useState<number | null>(null); // charcode of keydown key
-    const [words, setWords] = useState<string[]>(wordsList); // list of words to render
     const [inputVal, setInputVal] = useState<string>(""); // input value
     const [currentCharIndex, setCurrentCharIndex] = useState<number>(0); // current character  
-
-    const [displayNotification, setDisplayNotification] = useState<{ enterBtn: boolean, error: boolean }>({ enterBtn: false, error: false });
+    const [disableInput, setDisableInput] = useState<boolean>(false);
+    const [wordsListIndex, setWordsListIndex] = useState<number>(0);
 
     const handleUserKeyPress = useCallback(event => {
         const { keyCode } = event;
 
-        if (words.length) {
-            if (inputVal.toUpperCase() === words[0]) {
-                if (keyCode === 13) {
-                    setWordsCompleted(wordsCompleted + 1)
-                    setInputVal("")
-                    removeWord();
+        if (inputVal.toUpperCase() === wordsList[wordsListIndex]) {
+            
+            if (wordsListIndex === wordsList.length - 1) {
+                setGameStarted(!gameStarted);
+            }
 
-                    if (words.length === 0) {
-                        setGameStarted(!gameStarted)
-                    }
-                }
+            if (keyCode === 13) {
+                setWordsCompleted(wordsCompleted + 1)
+                setInputVal("")
+                removeWord();
+                setDisableInput(false);
+                setDisplayNotification({
+                    error: false,
+                    enterBtn: false
+                });
             }
         }
-    }, [inputVal, words]);
+
+    }, [inputVal]);
 
     useEffect(() => {
-        if (inputVal.toUpperCase() === words[0]) {
+        if (inputVal.toUpperCase() === wordsList[wordsListIndex]) {
             setDisplayNotification({
                 error: false,
                 enterBtn: true
-            })
+            });
+            setDisableInput(true);
         }
     }, [inputVal])
 
@@ -72,27 +77,25 @@ function App() {
 
 
     const removeWord = () => {
-        const wordsState = words;
-        wordsState.shift();
-        setWords(wordsState);
+        setWordsListIndex(prevState => prevState + 1);
         setCurrentCharIndex(0)
         setInputVal("");
     }
 
     const displayWord = () => {
-        return words.length ? (
+        return (
             <Word
-                word={words[0]}
+                word={wordsList[wordsListIndex]}
                 currentCharIndex={currentCharIndex}
             />
-        ) : 'Done'
+        )
     }
 
     const handleInputChange = (e: any) => {
         const { value } = e.target;
 
         const isValid =
-            words[0].charAt(currentCharIndex) ===
+            wordsList[wordsListIndex].charAt(currentCharIndex) ===
             value.charAt(currentCharIndex).toUpperCase();
 
         if (!isValid) {
@@ -100,6 +103,11 @@ function App() {
             setDisplayNotification({
                 enterBtn: false,
                 error: true
+            })
+        } else {
+            setDisplayNotification({
+                enterBtn: false,
+                error: false
             })
         }
         setInputVal(isValid ? value : "");
@@ -110,6 +118,10 @@ function App() {
         setGameStarted(true)
         setStartTimer(true);
         setShowGameResults(true);
+        setWordsListIndex(0);
+        setWordsAttempts(0);
+        setWordsCompleted(0);
+
     };
 
     const stop = () => {
@@ -125,7 +137,7 @@ function App() {
         <div className="App">
             {gameStarted ? (
                 <main>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div className="game-info">
                         <Scoreboard
                             wordsAttempts={wordsAttempts}
                             wordsCompleted={wordsCompleted}
@@ -136,9 +148,10 @@ function App() {
                             stop={stop}
                         />
                     </div>
+                    {displayNotification.error &&
+                        <Notification label="error" />}
                     {displayWord()}
-                    {displayNotification.enterBtn ? 'press enter' : ''}
-                    {displayNotification.error ? 'error' : ''}
+
                     <input
                         type="text"
                         style={{ width: '100%' }}
@@ -147,8 +160,14 @@ function App() {
                         onKeyDown={(e) => setCharCode(e.keyCode)}
                         onKeyUp={() => setCharCode(null)}
                         autoFocus
+                        readOnly={disableInput}
                     />
-                    <Keyboard k={charCode as unknown as number} />
+                    <div style={{ position: 'relative' }}>
+                        <Keyboard k={charCode as unknown as number} />
+                        {displayNotification.enterBtn &&
+                            <Notification label="Press Enter" />
+                        }
+                    </div>
                 </main>
             ) : (
                 showGameResults ?
