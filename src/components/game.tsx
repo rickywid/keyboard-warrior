@@ -7,14 +7,13 @@ import Word from "./word";
 import Keyboard from "./keyboard";
 import GameAudio from '../assets/sound/game.mp3';
 import '../styles/game.css';
+import WordsList from '../words-list';
 
 interface GameProps {
 
 }
 
 const Game: FunctionComponent<GameProps> = () => {
-
-    const wordsList = ["TORONTO", "MONTREAL", "VANCOUVER", "EDMONTON", "CALGARY", "OTTAWA", "SASKATCHEWAN"];
 
     const gameAudio = new Audio(GameAudio);
 
@@ -36,14 +35,16 @@ const Game: FunctionComponent<GameProps> = () => {
         setDisplayNotification,
         isWordsMatch,
         setIsWordsMatch,
-        soundOn
+        soundOn,
+        gameCategory
     } = useContext(GameContext);
 
 
     const handleUserKeyPress = useCallback(event => {
         const { keyCode } = event;
-        if (inputVal.toUpperCase() === wordsList[wordsListIndex]) {
-            if (wordsListIndex === wordsList.length - 1) {
+
+        if (inputVal.toUpperCase() === WordsList[gameCategory][wordsListIndex]) {
+            if (wordsListIndex === WordsList[gameCategory].length - 1) {
                 setGameStarted(!gameStarted);
                 setShowGameResults(true);
             }
@@ -64,7 +65,7 @@ const Game: FunctionComponent<GameProps> = () => {
     }, [inputVal]);
 
     useEffect(() => {
-        if (inputVal.toUpperCase() === wordsList[wordsListIndex]) {
+        if (inputVal.toUpperCase() === WordsList[gameCategory][wordsListIndex]) {
             setDisplayNotification({
                 error: false,
                 enterBtn: true
@@ -84,7 +85,7 @@ const Game: FunctionComponent<GameProps> = () => {
     const displayWord = () => {
         return (
             <Word
-                word={wordsList[wordsListIndex]}
+                word={WordsList[gameCategory][wordsListIndex]}
                 currentCharIndex={currentCharIndex}
             />
         )
@@ -109,7 +110,7 @@ const Game: FunctionComponent<GameProps> = () => {
         const { value } = e.target;
 
         const isValid =
-            wordsList[wordsListIndex].charAt(currentCharIndex) ===
+            WordsList[gameCategory][wordsListIndex].charAt(currentCharIndex) ===
             value.charAt(currentCharIndex).toUpperCase();
 
         if (!isValid) {

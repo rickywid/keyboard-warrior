@@ -1,14 +1,12 @@
 import { createContext, useState } from 'react';
 
-
-
 /** MISSION CONTROL CENTRE */
 
 
 export const GameContext = createContext<any>(null);
 
 const GameProvider = ({ children }: any) => {
-    
+
     const [gameStarted, setGameStarted] = useState<boolean>(false);
     const [wordsAttempts, setWordsAttempts] = useState<number>(0);
     const [wordsCompleted, setWordsCompleted] = useState<number>(0);
@@ -16,7 +14,7 @@ const GameProvider = ({ children }: any) => {
     const [displayNotification, setDisplayNotification] = useState<{ enterBtn: boolean, error: boolean }>({ enterBtn: false, error: false });
     const [isWordsMatch, setIsWordsMatch] = useState<boolean>(false);
     const [soundOn, setSoundOn] = useState<boolean>(true);
-
+    const [gameCategory, setGameCategory] = useState<number>(0);
 
     return (
         <GameContext.Provider value={{
@@ -33,7 +31,9 @@ const GameProvider = ({ children }: any) => {
             isWordsMatch,
             setIsWordsMatch,
             soundOn,
-            setSoundOn
+            setSoundOn,
+            gameCategory,
+            setGameCategory
         }} >
             {children}
         </GameContext.Provider>

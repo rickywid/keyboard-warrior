@@ -7,7 +7,13 @@ interface WelcomeProps { }
 
 const Welcome: FunctionComponent<WelcomeProps> = () => {
 
-    const { setGameStarted, setSoundOn, soundOn } = useContext(GameContext);
+    const {
+        setGameStarted,
+        setSoundOn,
+        soundOn,
+        setGameCategory,
+        gameCategory
+    } = useContext(GameContext);
     const menuAudio = new Audio(MenuAudio);
 
 
@@ -28,9 +34,18 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 
     const handleOnClick = () => setGameStarted(true)
 
+    const handleSelectChange = (e: any) => {
+        setGameCategory(e.target.value);
+    }
+
     return (
         <div className="welcome">
             <h1>KEYBOARD WARRIOR</h1>
+            <select name="" id="" onChange={(e) => handleSelectChange(e)}>
+                <option value="0">Canada</option>
+                <option value="1">USA</option>
+                <option value="2">Sports</option>
+            </select>
             <button onClick={() => setSoundOn(!soundOn)}>Sound {soundOn ? "On" : "Off"}</button>
             <button onClick={handleOnClick}>start game</button>
         </div>
