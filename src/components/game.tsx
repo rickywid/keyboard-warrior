@@ -5,6 +5,7 @@ import Timer from "./timer";
 import Notification from "./notifcation";
 import Word from "./word";
 import Keyboard from "./keyboard";
+import GameAudio from '../assets/sound/game.mp3';
 
 interface GameProps {
 
@@ -13,6 +14,8 @@ interface GameProps {
 const Game: FunctionComponent<GameProps> = () => {
 
     const wordsList = ["TORONTO", "MONTREAL", "VANCOUVER", "EDMONTON", "CALGARY", "OTTAWA", "SASKATCHEWAN"];
+
+    const gameAudio = new Audio(GameAudio);
 
     const [charCode, setCharCode] = useState<number | null>(null); // charcode of keydown key
     const [inputVal, setInputVal] = useState<string>(""); // input value
@@ -81,6 +84,13 @@ const Game: FunctionComponent<GameProps> = () => {
             />
         )
     }
+
+    useEffect(() => {
+        gameAudio.play();
+        return () => {
+            gameAudio.pause();
+        }
+    }, []);
 
     const handleInputChange = (e: any) => {
         const { value } = e.target;
