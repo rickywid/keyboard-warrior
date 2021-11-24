@@ -1,14 +1,15 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
+import { GameContext } from "../context/game";
 
 interface WelcomeProps {
-    start: () => void;
+    // start: () => void;
 }
 
-const Welcome: FunctionComponent<WelcomeProps> = ({ start }) => {
+const Welcome: FunctionComponent<WelcomeProps> = () => {
 
-    const handleOnClick = () => {
-        start();
-    }
+    const { setGameStarted } = useContext(GameContext);
+
+    const handleOnClick = () => setGameStarted(true)
 
     return (
         <div>

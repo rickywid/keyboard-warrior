@@ -1,37 +1,31 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { GameContext } from "../context/game";
 import useInterval from "../hooks/useInterval";
 // import AudioImg from "./audio.png";
 
 interface ITimer {
-    startTimer: boolean;
-    start: () => void;
-    stop: () => void;
+    // start: () => void;
 }
 
-function Timer({ startTimer, start, stop }: ITimer) {
+function Timer() {
+
+    const { gameStarted, setShowGameResults, setGameStarted } = useContext(GameContext);
     const [seconds, setSeconds] = useState(5);
     const [minutes, setMinutes] = useState(0);
-    //   const [startTimer, setStartTimer] = useState<boolean>(false);
-    //   const Alarm = new Audio(AlarmWAV);
-
-    //   const playAudio = () => Alarm.play();
 
     // How to use setInterval w/ React
     // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
 
     useInterval(() => {
-        if (startTimer) {
+        if (gameStarted) {
             if (seconds === 0) {
                 if (minutes !== 0) {
                     setSeconds(59);
                     setMinutes(minutes - 1)
                 } else {
-                    stop();
-                    //   playAudio();
-                    //   setStartTimer(false);
-                    // setMinutes(25);
-                    // setSeconds(0);
-
+                    // stop();
+                    setGameStarted(false);
+                    setShowGameResults(true);
                 }
             } else {
                 setSeconds(seconds - 1);
@@ -43,10 +37,10 @@ function Timer({ startTimer, start, stop }: ITimer) {
     const minutesTimer = minutes < 10 ? `0${minutes}` : minutes;
 
     return (
-            <div className="timer">
-                <h2 className="minutes">{minutesTimer}:</h2>
-                <h2 className="seconds">{secondsTimer}</h2>
-            </div>
+        <div className="timer">
+            <h2 className="minutes">{minutesTimer}:</h2>
+            <h2 className="seconds">{secondsTimer}</h2>
+        </div>
     );
 }
 

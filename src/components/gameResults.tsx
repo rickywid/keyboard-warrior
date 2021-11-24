@@ -1,18 +1,19 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useContext } from "react";
+import { GameContext } from "../context/game";
 
-interface GameResultsProps {
-    start: () => void;
-    updateGameResults: (val: boolean) => void;
-}
+interface GameResultsProps {}
 
-const GameResults: FunctionComponent<GameResultsProps> = ({start, updateGameResults}) => {
+const GameResults: FunctionComponent<GameResultsProps> = () => {
+
+    const { setShowGameResults, setGameStarted } = useContext(GameContext);
+
     return (
         <div>
             <button onClick={() => {
-                start();
-                updateGameResults(true)
+                setGameStarted(true);
+                setShowGameResults(true)
             }}>Yes</button>
-            <button onClick={() => updateGameResults(false)}>No</button>
+            <button onClick={() => setShowGameResults(false)}>No</button>
         </div>
     );
 }
