@@ -34,7 +34,9 @@ const Game: FunctionComponent<GameProps> = () => {
         setDisplayNotification,
         setIsWordsMatch,
         soundOn,
-        gameCategory
+        gameCategory,
+        setGameScore,
+        gameScore
     } = useContext(GameContext);
 
 
@@ -57,10 +59,24 @@ const Game: FunctionComponent<GameProps> = () => {
                     error: false,
                     enterBtn: false
                 });
+                setGameScore(gameScore + 100);
             }
         }
 
-    }, [inputVal, gameCategory, gameStarted, setDisplayNotification, setGameStarted, setIsWordsMatch, setShowGameResults, setWordsCompleted, wordsCompleted, wordsListIndex]);
+    }, [
+        inputVal, 
+        gameCategory, 
+        gameStarted, 
+        setDisplayNotification, 
+        setGameStarted, 
+        setIsWordsMatch, 
+        setShowGameResults, 
+        setWordsCompleted, 
+        wordsCompleted, 
+        wordsListIndex,
+        gameScore,
+        setGameScore
+    ]);
 
     useEffect(() => {
         if (inputVal.toUpperCase() === WordsList[gameCategory][wordsListIndex]) {
@@ -119,6 +135,7 @@ const Game: FunctionComponent<GameProps> = () => {
                 enterBtn: false,
                 error: true
             });
+            setGameScore(gameScore - 25);
         } else {
             setDisplayNotification({
                 enterBtn: false,
@@ -135,6 +152,7 @@ const Game: FunctionComponent<GameProps> = () => {
         setInputVal("");
     }
 
+    console.log(displayNotification.error)
     return (
         <main className="game">
             <img src={SwordsPNG} alt="words" />
@@ -143,31 +161,39 @@ const Game: FunctionComponent<GameProps> = () => {
                 {displayWord()}
                 {displayNotification.error && <Notification label="TRY AGAIN" />}
             </div>
-            <input
-                type="text"
-                className="input"
-                value={inputVal}
-                onChange={e => handleInputChange(e)}
-                onKeyDown={(e) => {
-                    setCharCode(e.keyCode)
-                }}
-                onKeyUp={() => setCharCode(null)}
-                autoFocus
-                readOnly={disableInput}
-            />
-            <div className="game-info">
-                <button
-                    className="back-btn"
-                    onClick={() => setGameStarted(false)}
-                >
-                    EXIT
-                </button>
-                <Scoreboard
-                    wordsAttempts={wordsAttempts}
-                    wordsCompleted={wordsCompleted}
+            <div className="input-group">
+                <div className="game-score">
+                    <p>Score: {gameScore}</p>
+                </div>
+                <input
+                    type="text"
+                    className="input"
+                    value={inputVal}
+                    onChange={e => handleInputChange(e)}
+                    onKeyDown={(e) => {
+                        setCharCode(e.keyCode)
+                    }}
+                    onKeyUp={() => setCharCode(null)}
+                    autoFocus
+                    readOnly={disableInput}
                 />
-                <Timer
-                />
+                <div className="game-info">
+                    <button
+                        className="back-btn"
+                        onClick={() => {
+                            setGameStarted(false)
+                            setShowGameResults(false)
+                        }}
+                    >
+                        EXIT
+                    </button>
+                    <Scoreboard
+                        wordsAttempts={wordsAttempts}
+                        wordsCompleted={wordsCompleted}
+                    />
+                    <Timer
+                    />
+                </div>
             </div>
             <div style={{ position: 'relative' }}>
                 <Keyboard k={charCode as unknown as number} />

@@ -13,7 +13,15 @@
     border-radius: 5px;
 }
 
-.game .game-info {
+.game .input-group {
+    position: relative;
+}
+
+.game .input-group p {
+    font-size: 24px;
+}
+
+.game .input-group .game-info {
     margin-top: -30px;
     margin-right: 20px;
     margin-left: 20px;
@@ -22,7 +30,18 @@
     padding-bottom: 5px;
 }
 
-.game .game-info .back-btn {
+.game .input-group .game-score {
+    position: absolute;
+    left: 25px;
+    top: 10px;
+}
+
+.game .input-group .game-score p {
+    margin: 0;
+}
+
+
+.game .input-group .game-info .back-btn {
     background: none;
     color: white;
     border: none;
@@ -31,4 +50,3 @@
 .game .game-top-bar {
     position: relative;
 }
-

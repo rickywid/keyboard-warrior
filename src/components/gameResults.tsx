@@ -7,9 +7,30 @@ interface GameResultsProps { }
 
 const GameResults: FunctionComponent<GameResultsProps> = () => {
 
-    const { setShowGameResults, setGameStarted, soundOn } = useContext(GameContext);
+    const {
+        setShowGameResults,
+        setGameStarted,
+        soundOn,
+        gameScore,
+        wordsCompleted,
+        wordsAttempts,
+        setDisplayNotification,
+        setIsWordsMatch,
+        setWordsCompleted,
+        setWordsAttempts,
+        setGameScore
+    } = useContext(GameContext);
 
     useEffect(() => {
+        setDisplayNotification({
+            error: false,
+            enterBtn: false
+        });
+        setIsWordsMatch(false);
+        setWordsCompleted(0);
+        setWordsAttempts(0);
+        setGameScore(0);
+
         const happyAudio = new Audio(HappyAudio);
 
         if (soundOn) {
@@ -19,19 +40,31 @@ const GameResults: FunctionComponent<GameResultsProps> = () => {
         return () => {
             happyAudio.pause();
         }
-    }, [soundOn]);
+    }, [
+        soundOn,
+        setDisplayNotification,
+        setIsWordsMatch,
+        setWordsCompleted,
+        setWordsAttempts,
+        setGameScore
+    ]);
 
     return (
         <div className="welcome">
             <img src={SwordsPNG} alt="words" />
-            <h1>KEYBOARD WARRIOR</h1>
-            <p>Play Again?</p>
+            <h1>GAME OVER</h1>
+            <div>
+                <p># of mistakes: {wordsAttempts}</p>
+                <p>Words Completed: {wordsCompleted}</p>
+                <p>Score: {gameScore}</p>
+            </div>
+            <h2>Play Again?</h2>
             <div className="btn-group">
                 <button onClick={() => {
                     setGameStarted(true);
                     setShowGameResults(true)
-                }}>Yes</button>
-                <button onClick={() => setShowGameResults(false)}>No</button>
+                }}>YES</button>
+                <button onClick={() => setShowGameResults(false)}>NO</button>
             </div>
         </div>
     );

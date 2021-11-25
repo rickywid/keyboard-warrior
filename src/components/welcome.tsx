@@ -15,7 +15,8 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
         setDisplayNotification,
         setIsWordsMatch,
         setWordsCompleted,
-        setWordsAttempts
+        setWordsAttempts,
+        setGameScore
     } = useContext(GameContext);
 
     useEffect(() => {
@@ -26,7 +27,14 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
         setIsWordsMatch(false);
         setWordsCompleted(0);
         setWordsAttempts(0);
-    }, [setDisplayNotification])
+        setGameScore(0);
+    }, [
+        setDisplayNotification,
+        setIsWordsMatch,
+        setWordsCompleted,
+        setWordsAttempts,
+        setGameScore
+    ])
 
     useEffect(() => {
         const menuAudio = new Audio(MenuAudio);
