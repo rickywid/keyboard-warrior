@@ -69,7 +69,7 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
                 <select name="" id="" onChange={(e) => handleSelectChange(e)}>
                     <option value="">Select Category</option>
                     <option value="0">Canada</option>
-                    <option value="1">USA</option>
+                    <option value="1">Technology</option>
                     <option value="2">Sports</option>
                 </select>
                 <button onClick={() => setSoundOn(!soundOn)}>SOUND {soundOn ? "ON" : "OFF"}</button>

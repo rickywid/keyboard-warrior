@@ -10,7 +10,7 @@ const Scoreboard: FunctionComponent<ScoreboardProps> = ({ wordsAttempts, wordsCo
     return (
         <div className="scoreboard">
             <p>attempts: {wordsAttempts}</p>
-            <p>completed: {wordsCompleted}</p>
+            <p>completed: {wordsCompleted}/30</p>
         </div>
     );
 }
