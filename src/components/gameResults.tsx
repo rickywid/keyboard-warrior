@@ -2,6 +2,7 @@ import { FunctionComponent, useContext, useEffect } from "react";
 import { GameContext } from "../context/game";
 import HappyAudio from '../assets/sound/happy.mp3';
 import SwordsPNG from '../assets/images/swords.png';
+import '../styles/game-results.css';
 
 interface GameResultsProps { }
 
@@ -47,13 +48,13 @@ const GameResults: FunctionComponent<GameResultsProps> = () => {
     ]);
 
     return (
-        <div className="welcome">
+        <div className="game-results welcome">
             <img src={SwordsPNG} alt="words" />
             <h1>GAME OVER</h1>
-            <div>
+            <div className="summary">
                 <p># of mistakes: {wordsAttempts}</p>
                 <p>Words Completed: {wordsCompleted}</p>
-                <p>Score: {gameScore}</p>
+                <p className="score">Score: {gameScore}</p>
             </div>
             <h2>Play Again?</h2>
             <div className="btn-group">
