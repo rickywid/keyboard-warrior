@@ -65,6 +65,7 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
         <div className="welcome">
             <img src={SwordsPNG} alt="words" />
             <h1>KEYBOARD WARRIOR</h1>
+            <p>The ultimate typing test.</p>
             <div className="btn-group">
                 <select name="" id="" onChange={(e) => handleSelectChange(e)}>
                     <option value="">Select Category</option>
