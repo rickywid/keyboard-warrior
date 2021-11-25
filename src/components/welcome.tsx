@@ -3,6 +3,9 @@ import { GameContext } from "../context/game";
 import MenuAudio from '../assets/sound/menu.mp3';
 import '../styles/welcome.css';
 import SwordsPNG from '../assets/images/swords.png';
+import useShuffle from "../hooks/shuffle";
+import WordsList from '../words-list';
+
 interface WelcomeProps { }
 
 const Welcome: FunctionComponent<WelcomeProps> = () => {
@@ -12,9 +15,17 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
         setSoundOn,
         soundOn,
         setGameCategory,
+        gameCategory,
         setDisplayNotification,
         setIsWordsMatch,
+        setWords
     } = useContext(GameContext);
+
+    const words = useShuffle(WordsList[gameCategory]);
+
+    useEffect(() => {
+        setWords(words);
+    }, [setWords, words]);
 
     useEffect(() => {
         setDisplayNotification({

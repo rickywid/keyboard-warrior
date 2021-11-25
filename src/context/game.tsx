@@ -16,6 +16,7 @@ const GameProvider = ({ children }: any) => {
     const [soundOn, setSoundOn] = useState<boolean>(true);
     const [gameCategory, setGameCategory] = useState<number>(0);
     const [gameScore, setGameScore] = useState<number>(0);
+    const [words, setWords] = useState<string[]>();
 
     return (
         <GameContext.Provider value={{
@@ -36,7 +37,9 @@ const GameProvider = ({ children }: any) => {
             gameCategory,
             setGameCategory,
             gameScore,
-            setGameScore
+            setGameScore,
+            words,
+            setWords
         }} >
             {children}
         </GameContext.Provider>

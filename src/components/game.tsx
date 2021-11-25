@@ -39,7 +39,6 @@ const Game: FunctionComponent<GameProps> = () => {
         gameScore
     } = useContext(GameContext);
 
-
     const handleUserKeyPress = useCallback(event => {
         const { keyCode } = event;
 
