@@ -7,15 +7,18 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+button {
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
-}
-
-.game-info {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
 }
 
 .timer {

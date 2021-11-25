@@ -2,7 +2,7 @@ import { FunctionComponent, useContext, useEffect } from "react";
 import { GameContext } from "../context/game";
 import MenuAudio from '../assets/sound/menu.mp3';
 import '../styles/welcome.css';
-
+import SwordsPNG from '../assets/images/swords.png';
 interface WelcomeProps { }
 
 const Welcome: FunctionComponent<WelcomeProps> = () => {
@@ -11,9 +11,22 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
         setGameStarted,
         setSoundOn,
         soundOn,
-        setGameCategory
+        setGameCategory,
+        setDisplayNotification,
+        setIsWordsMatch,
+        setWordsCompleted,
+        setWordsAttempts
     } = useContext(GameContext);
 
+    useEffect(() => {
+        setDisplayNotification({
+            error: false,
+            enterBtn: false
+        });
+        setIsWordsMatch(false);
+        setWordsCompleted(0);
+        setWordsAttempts(0);
+    }, [setDisplayNotification])
 
     useEffect(() => {
         const menuAudio = new Audio(MenuAudio);
@@ -40,14 +53,21 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
 
     return (
         <div className="welcome">
+            <img src={SwordsPNG} alt="words" />
             <h1>KEYBOARD WARRIOR</h1>
-            <select name="" id="" onChange={(e) => handleSelectChange(e)}>
-                <option value="0">Canada</option>
-                <option value="1">USA</option>
-                <option value="2">Sports</option>
-            </select>
-            <button onClick={() => setSoundOn(!soundOn)}>Sound {soundOn ? "On" : "Off"}</button>
-            <button onClick={handleOnClick}>start game</button>
+            <div className="btn-group">
+                <select name="" id="" onChange={(e) => handleSelectChange(e)}>
+                    <option value="">Select Category</option>
+                    <option value="0">Canada</option>
+                    <option value="1">USA</option>
+                    <option value="2">Sports</option>
+                </select>
+                <button onClick={() => setSoundOn(!soundOn)}>SOUND {soundOn ? "ON" : "OFF"}</button>
+            </div>
+            <button
+                onClick={handleOnClick}
+                className="start-btn"
+            >START</button>
         </div>
 
     );

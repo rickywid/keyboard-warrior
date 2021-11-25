@@ -8,6 +8,7 @@ import Keyboard from "./keyboard";
 import GameAudio from '../assets/sound/game.mp3';
 import '../styles/game.css';
 import WordsList from '../words-list';
+import SwordsPNG from '../assets/images/swords.png';
 
 interface GameProps {
 
@@ -136,6 +137,8 @@ const Game: FunctionComponent<GameProps> = () => {
 
     return (
         <main className="game">
+            <img src={SwordsPNG} alt="words" />
+            <h1>KEYBOARD WARRIOR</h1>
             <div className="game-top-bar">
                 {displayWord()}
                 {displayNotification.error && <Notification label="TRY AGAIN" />}
@@ -153,6 +156,12 @@ const Game: FunctionComponent<GameProps> = () => {
                 readOnly={disableInput}
             />
             <div className="game-info">
+                <button
+                    className="back-btn"
+                    onClick={() => setGameStarted(false)}
+                >
+                    EXIT
+                </button>
                 <Scoreboard
                     wordsAttempts={wordsAttempts}
                     wordsCompleted={wordsCompleted}
@@ -164,7 +173,6 @@ const Game: FunctionComponent<GameProps> = () => {
                 <Keyboard k={charCode as unknown as number} />
                 {/* {displayNotification.enterBtn && <Notification label="" />} */}
             </div>
-            <button onClick={() => setGameStarted(false)}>back</button>
         </main>
     );
 }
