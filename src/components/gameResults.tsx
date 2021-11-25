@@ -46,6 +46,7 @@ const GameResults: FunctionComponent<GameResultsProps> = () => {
         setGameScore
     ]);
 
+    console.log(wordsCompleted, wordsAttempts, gameScore)
     return (
         <div className="welcome">
             <img src={SwordsPNG} alt="words" />

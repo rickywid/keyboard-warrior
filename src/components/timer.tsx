@@ -5,8 +5,8 @@ import useInterval from "../hooks/useInterval";
 function Timer() {
 
     const { gameStarted, setShowGameResults, setGameStarted } = useContext(GameContext);
-    const [seconds, setSeconds] = useState(5);
-    const [minutes, setMinutes] = useState(100);
+    const [seconds, setSeconds] = useState(0);
+    const [minutes, setMinutes] = useState(1);
 
     // How to use setInterval w/ React
     // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
@@ -18,7 +18,6 @@ function Timer() {
                     setSeconds(59);
                     setMinutes(minutes - 1)
                 } else {
-                    // stop();
                     setGameStarted(false);
                     setShowGameResults(true);
                 }

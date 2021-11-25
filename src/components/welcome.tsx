@@ -14,9 +14,6 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
         setGameCategory,
         setDisplayNotification,
         setIsWordsMatch,
-        setWordsCompleted,
-        setWordsAttempts,
-        setGameScore
     } = useContext(GameContext);
 
     useEffect(() => {
@@ -25,15 +22,9 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
             enterBtn: false
         });
         setIsWordsMatch(false);
-        setWordsCompleted(0);
-        setWordsAttempts(0);
-        setGameScore(0);
     }, [
         setDisplayNotification,
-        setIsWordsMatch,
-        setWordsCompleted,
-        setWordsAttempts,
-        setGameScore
+        setIsWordsMatch
     ])
 
     useEffect(() => {

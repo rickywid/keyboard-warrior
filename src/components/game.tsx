@@ -124,7 +124,6 @@ const Game: FunctionComponent<GameProps> = () => {
         if (soundOn) {
             gameAudio.play();
             gameAudio.addEventListener('ended', () => {
-                console.log('ended')
                 gameAudio.currentTime = 0;
                 gameAudio.play();
             })
@@ -170,7 +169,6 @@ const Game: FunctionComponent<GameProps> = () => {
         setInputVal("");
     }
 
-    console.log(displayNotification.error)
     return (
         <main className="game">
             <img src={SwordsPNG} alt="words" />
