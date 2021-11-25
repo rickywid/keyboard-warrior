@@ -8,9 +8,9 @@ const GameResults: FunctionComponent<GameResultsProps> = () => {
 
     const { setShowGameResults, setGameStarted, soundOn } = useContext(GameContext);
 
-    const happyAudio = new Audio(HappyAudio);
-
     useEffect(() => {
+        const happyAudio = new Audio(HappyAudio);
+
         if (soundOn) {
             happyAudio.play();
         }

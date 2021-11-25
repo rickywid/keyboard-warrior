@@ -1,11 +1,6 @@
 import { useContext, useState } from "react";
 import { GameContext } from "../context/game";
 import useInterval from "../hooks/useInterval";
-// import AudioImg from "./audio.png";
-
-interface ITimer {
-    // start: () => void;
-}
 
 function Timer() {
 

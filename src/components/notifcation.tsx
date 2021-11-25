@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FunctionComponent, useContext } from "react";
+import { FunctionComponent } from "react";
 import "../styles/notification.css";
 import ArrowPNG from '../assets/images/arrow.png';
 

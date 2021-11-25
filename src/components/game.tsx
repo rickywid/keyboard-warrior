@@ -15,8 +15,6 @@ interface GameProps {
 
 const Game: FunctionComponent<GameProps> = () => {
 
-    const gameAudio = new Audio(GameAudio);
-
     const [charCode, setCharCode] = useState<number | null>(null); // charcode of keydown key
     const [inputVal, setInputVal] = useState<string>(""); // input value
     const [currentCharIndex, setCurrentCharIndex] = useState<number>(0); // current character  
@@ -33,7 +31,6 @@ const Game: FunctionComponent<GameProps> = () => {
         setShowGameResults,
         displayNotification,
         setDisplayNotification,
-        isWordsMatch,
         setIsWordsMatch,
         soundOn,
         gameCategory
@@ -62,7 +59,7 @@ const Game: FunctionComponent<GameProps> = () => {
             }
         }
 
-    }, [inputVal]);
+    }, [inputVal, gameCategory, gameStarted, setDisplayNotification, setGameStarted, setIsWordsMatch, setShowGameResults, setWordsCompleted, wordsCompleted, wordsListIndex]);
 
     useEffect(() => {
         if (inputVal.toUpperCase() === WordsList[gameCategory][wordsListIndex]) {
@@ -73,7 +70,7 @@ const Game: FunctionComponent<GameProps> = () => {
             setDisableInput(true);
             setIsWordsMatch(true);
         }
-    }, [inputVal])
+    }, [inputVal, gameCategory, setDisplayNotification, setIsWordsMatch, wordsListIndex])
 
     useEffect(() => {
         window.addEventListener("keydown", handleUserKeyPress);
@@ -92,6 +89,8 @@ const Game: FunctionComponent<GameProps> = () => {
     }
 
     useEffect(() => {
+        const gameAudio = new Audio(GameAudio);
+
         if (soundOn) {
             gameAudio.play();
             gameAudio.addEventListener('ended', () => {
@@ -134,16 +133,6 @@ const Game: FunctionComponent<GameProps> = () => {
         setCurrentCharIndex(0)
         setInputVal("");
     }
-
-
-
-    const start = () => {
-        setGameStarted(true)
-        setShowGameResults(true);
-        setWordsListIndex(0);
-        setWordsAttempts(0);
-        setWordsCompleted(0);
-    };
 
     return (
         <main className="game">

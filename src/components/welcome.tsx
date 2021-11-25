@@ -11,13 +11,13 @@ const Welcome: FunctionComponent<WelcomeProps> = () => {
         setGameStarted,
         setSoundOn,
         soundOn,
-        setGameCategory,
-        gameCategory
+        setGameCategory
     } = useContext(GameContext);
-    const menuAudio = new Audio(MenuAudio);
 
 
     useEffect(() => {
+        const menuAudio = new Audio(MenuAudio);
+
         if (soundOn) {
             menuAudio.play();
             menuAudio.addEventListener('ended', () => {
