@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/keyboard-warrior/static/css/main.51c6c042.chunk.css",
-    "main.js": "/keyboard-warrior/static/js/main.86fd4c05.chunk.js",
-    "main.js.map": "/keyboard-warrior/static/js/main.86fd4c05.chunk.js.map",
-    "runtime-main.js": "/keyboard-warrior/static/js/runtime-main.2edbc9a7.js",
-    "runtime-main.js.map": "/keyboard-warrior/static/js/runtime-main.2edbc9a7.js.map",
-    "static/js/2.cdf7d4ca.chunk.js": "/keyboard-warrior/static/js/2.cdf7d4ca.chunk.js",
-    "static/js/2.cdf7d4ca.chunk.js.map": "/keyboard-warrior/static/js/2.cdf7d4ca.chunk.js.map",
-    "static/js/3.76df4a49.chunk.js": "/keyboard-warrior/static/js/3.76df4a49.chunk.js",
-    "static/js/3.76df4a49.chunk.js.map": "/keyboard-warrior/static/js/3.76df4a49.chunk.js.map",
+    "main.css": "/keyboard-warrior/static/css/main.3bfe051b.chunk.css",
+    "main.js": "/keyboard-warrior/static/js/main.20f15da1.chunk.js",
+    "main.js.map": "/keyboard-warrior/static/js/main.20f15da1.chunk.js.map",
+    "runtime-main.js": "/keyboard-warrior/static/js/runtime-main.62ef1fe2.js",
+    "runtime-main.js.map": "/keyboard-warrior/static/js/runtime-main.62ef1fe2.js.map",
+    "static/js/2.f668e7a3.chunk.js": "/keyboard-warrior/static/js/2.f668e7a3.chunk.js",
+    "static/js/2.f668e7a3.chunk.js.map": "/keyboard-warrior/static/js/2.f668e7a3.chunk.js.map",
+    "static/js/3.99ae777d.chunk.js": "/keyboard-warrior/static/js/3.99ae777d.chunk.js",
+    "static/js/3.99ae777d.chunk.js.map": "/keyboard-warrior/static/js/3.99ae777d.chunk.js.map",
     "index.html": "/keyboard-warrior/index.html",
-    "static/css/main.51c6c042.chunk.css.map": "/keyboard-warrior/static/css/main.51c6c042.chunk.css.map",
-    "static/js/2.cdf7d4ca.chunk.js.LICENSE.txt": "/keyboard-warrior/static/js/2.cdf7d4ca.chunk.js.LICENSE.txt",
+    "static/css/main.3bfe051b.chunk.css.map": "/keyboard-warrior/static/css/main.3bfe051b.chunk.css.map",
+    "static/js/2.f668e7a3.chunk.js.LICENSE.txt": "/keyboard-warrior/static/js/2.f668e7a3.chunk.js.LICENSE.txt",
     "static/media/game.efaaa3e8.mp3": "/keyboard-warrior/static/media/game.efaaa3e8.mp3",
     "static/media/happy.bfab825a.mp3": "/keyboard-warrior/static/media/happy.bfab825a.mp3",
     "static/media/menu.b97e1ea7.mp3": "/keyboard-warrior/static/media/menu.b97e1ea7.mp3"
   },
   "entrypoints": [
-    "static/js/runtime-main.2edbc9a7.js",
-    "static/js/2.cdf7d4ca.chunk.js",
-    "static/css/main.51c6c042.chunk.css",
-    "static/js/main.86fd4c05.chunk.js"
+    "static/js/runtime-main.62ef1fe2.js",
+    "static/js/2.f668e7a3.chunk.js",
+    "static/css/main.3bfe051b.chunk.css",
+    "static/js/main.20f15da1.chunk.js"
   ]
 }
