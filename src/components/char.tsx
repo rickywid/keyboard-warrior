@@ -12,11 +12,11 @@ const Char: FunctionComponent<CharProps> = ({ character, underline, secondary })
         display: 'inline-block',
         textDecoration: underline ? 'underline' : 'none',
         color: secondary ? '#cfcece' : '',
-        // float: secondary ? 'right' : 'none'
     }
-    return (
+
+    return character !== " " ? (
         <h1 style={style}>{character}</h1 >
-    );
+    ) : <h1 style={style}>&nbsp;</h1 >;
 }
 
 export default Char;
