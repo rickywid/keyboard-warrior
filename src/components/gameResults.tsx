@@ -27,10 +27,7 @@ const GameResults: FunctionComponent<GameResultsProps> = () => {
             enterBtn: false
         });
         setIsWordsMatch(false);
-        setWordsCompleted(0);
-        setWordsAttempts(0);
-        setGameScore(0);
-
+        
         const happyAudio = new Audio(HappyAudio);
 
         if (soundOn) {

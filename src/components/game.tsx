@@ -61,21 +61,31 @@ const Game: FunctionComponent<GameProps> = () => {
                 });
                 setGameScore(gameScore + 100);
             }
+        } else {
+            if (keyCode === 13) {
+                setInputVal("");
+                setDisplayNotification({
+                    error: true,
+                    enterBtn: false
+                });
+                setWordsAttempts(wordsAttempts + 1);
+            }
         }
-
     }, [
-        inputVal, 
-        gameCategory, 
-        gameStarted, 
-        setDisplayNotification, 
-        setGameStarted, 
-        setIsWordsMatch, 
-        setShowGameResults, 
-        setWordsCompleted, 
-        wordsCompleted, 
+        inputVal,
+        gameCategory,
+        gameStarted,
+        setDisplayNotification,
+        setGameStarted,
+        setIsWordsMatch,
+        setShowGameResults,
+        setWordsCompleted,
+        wordsCompleted,
         wordsListIndex,
         gameScore,
-        setGameScore
+        setGameScore,
+        setWordsAttempts,
+        wordsAttempts
     ]);
 
     useEffect(() => {
@@ -106,6 +116,9 @@ const Game: FunctionComponent<GameProps> = () => {
     }
 
     useEffect(() => {
+        setWordsCompleted(0);
+        setWordsAttempts(0);
+        setGameScore(0);
         const gameAudio = new Audio(GameAudio);
 
         if (soundOn) {
@@ -120,7 +133,12 @@ const Game: FunctionComponent<GameProps> = () => {
         return () => {
             gameAudio.pause();
         }
-    }, [soundOn]);
+    }, [
+        soundOn,
+        setGameScore,
+        setWordsAttempts,
+        setWordsCompleted
+    ]);
 
     const handleInputChange = (e: any) => {
         const { value } = e.target;

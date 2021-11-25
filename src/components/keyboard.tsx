@@ -40,7 +40,7 @@ const Keyboard: FunctionComponent<KeyboardProps> = ({ k }) => {
                 <Key val="P" isPressed={k === 80 ? true : false} colorScheme="white" />
                 <Key val="[ {" colorScheme="white" />
                 <Key val="] }" colorScheme="white" />
-                <Key val="\ |" isPressed={k === 8 ? true : false} colorScheme="white" stretch={true} />
+                <Key val="\ |" colorScheme="white" stretch={true} />
             </div>
             <div className="keyboard-keys middle">
                 <Key val="Caps" colorScheme="grey" stretch={true} />
